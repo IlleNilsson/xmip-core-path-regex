@@ -177,10 +177,7 @@ fn text(value: StructuredValue) -> Result<String, ContractError> {
 #[cfg(test)]
 mod tests {
     use super::*;
-
-    fn stream(text: &str) -> Stream {
-        Stream::new(StreamId::new(1), text.as_bytes().to_vec(), None)
-    }
+    use path::fixture::stream;
 
     const RECORD: &str = "MSH|^~\\&|LAB|ORDER=A1;STATUS=open;QTY=2\r\n";
 
