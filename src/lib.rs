@@ -25,11 +25,11 @@ mod pattern;
 
 pub use pattern::Pattern;
 
-use path::{Path, PathCost, PathEngine};
-use sdk::contract::{
+use contract::{
     ContractDescriptor, ContractError, ContractId, StructureReader, StructureWriter,
     StructuredValue,
 };
+use path::{Path, PathCost, PathEngine};
 use stream::Stream;
 use xcore::StreamId;
 
