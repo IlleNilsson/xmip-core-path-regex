@@ -1,8 +1,8 @@
 //! The expression of the `regex` language: a pattern, optionally followed by
 //! `#name` picking one named group out of it.
 
-use contract::ContractError;
 use regex::Regex;
+use sdk::contract::ContractError;
 use std::ops::Range;
 
 /// A compiled expression: the pattern and which part of a match it names.
