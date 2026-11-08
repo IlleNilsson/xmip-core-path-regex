@@ -26,7 +26,7 @@ mod pattern;
 pub use pattern::Pattern;
 
 use contract::ContractError;
-use path::{CompiledExpression, Content, PathLanguage, Rewriting};
+use path::{CompiledExpression, Content, Namespaces, PathLanguage, Rewriting};
 use xcore::ScalarValue;
 
 /// The language `regex`.
@@ -37,7 +37,12 @@ impl PathLanguage for RegexLanguage {
         "regex"
     }
 
-    fn compile(&self, expression: &str) -> Result<Box<dyn CompiledExpression>, ContractError> {
+    fn compile(
+        &self,
+        expression: &str,
+        namespaces: &Namespaces,
+    ) -> Result<Box<dyn CompiledExpression>, ContractError> {
+        namespaces.unused_by(self.language())?;
         Ok(Box::new(Compiled {
             pattern: Pattern::parse(expression)?,
             expression: expression.to_string(),
@@ -89,7 +94,7 @@ mod tests {
     const RECORD: &str = "MSH|^~\\&|LAB|ORDER=A1;STATUS=open;QTY=2\r\n";
 
     fn compiled(pattern: &str) -> Result<Box<dyn CompiledExpression>, ContractError> {
-        RegexLanguage.compile(pattern)
+        RegexLanguage.compile(pattern, &Namespaces::new())
     }
 
     #[test]
