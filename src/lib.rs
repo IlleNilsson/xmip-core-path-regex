@@ -134,7 +134,7 @@ mod tests {
         assert_eq!(out.id(), StreamId::new(2));
         assert_eq!(out.media_type(), Some("text/plain"));
         assert_eq!(
-            out.bytes(),
+            out.load().expect("held"),
             b"MSH|^~\\&trueORDER=A1;STATUS=closed;QTY=30\r\n"
         );
     }
